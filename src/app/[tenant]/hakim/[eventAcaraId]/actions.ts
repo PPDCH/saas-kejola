@@ -1,6 +1,7 @@
 'use server'
 import { createClient } from '@/lib/supabase/server'
 import { getTenant, getCurrentUser } from '@/lib/tenant'
+import { calculateRankings } from '@/lib/ranking'
 import { revalidatePath } from 'next/cache'
 
 function convertToStandardUnit(value: string, unit: string): number {
@@ -56,6 +57,9 @@ export async function submitResult(
     })
     if (error) return { error: 'Gagal simpan keputusan.' }
   }
+
+  // Auto-recalculate rankings setiap kali keputusan disimpan
+  await calculateRankings(eventAcaraId)
 
   revalidatePath(`/${tenantSlug}/hakim/${eventAcaraId}`)
   return { success: true }
