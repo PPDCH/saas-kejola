@@ -136,6 +136,11 @@ export default async function EventDetailPage({
         <Link href={`/${slug}/events/${eventId}/leaderboard`}>
           <Button variant="outline">Papan Markah</Button>
         </Link>
+        {isAdmin && (
+          <Link href={`/${slug}/events/${eventId}/laporan`}>
+            <Button variant="outline">Laporan & PDF</Button>
+          </Link>
+        )}
       </div>
     </div>
   )
