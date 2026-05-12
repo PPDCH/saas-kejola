@@ -1,0 +1,7 @@
+{
+  "permissions": {
+    "allow": [
+      "PowerShell(cd \"D:\\\\claude\\\\saas-kejola\" && npx shadcn@latest add form --yes --overwrite 2>&1; echo \"Exit: $LASTEXITCODE\")"
+    ]
+  }
+}
