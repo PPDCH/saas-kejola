@@ -9,7 +9,14 @@ export default async function TenantLayout({
   params: Promise<{ tenant: string }>
 }) {
   const { tenant: slug } = await params
-  const tenant = await getTenant(slug)
+
+  let tenant = null
+  try {
+    tenant = await getTenant(slug)
+  } catch (e) {
+    console.error('[TenantLayout] getTenant threw:', e)
+    throw e
+  }
 
   if (!tenant) notFound()
 
